@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/history_adapter_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/history_item_bg"
+	android:paddingLeft="5dp"
+	android:paddingRight="5dp" >
+    
+    <ImageView
+        android:id="@+id/history_list_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_hr_type_custom_unselected"
+        android:layout_centerVertical="true"
+        android:paddingLeft="5dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/history_list_sign"
+        android:layout_centerVertical="true"
+        android:paddingLeft="10dp" >
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/history_list_timetitle"
+            android:textSize="18sp"
+            android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/history_list_time"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/history_list_time_default"
+            android:textColor="@color/blue" />
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/history_list_heartnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/history_list_bpm"
+        android:text="@string/history_list_heartnum_default"
+        android:textSize="30sp"
+        android:textColor="@color/black" />
+    
+    <LinearLayout
+        android:id="@+id/history_list_bpm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" >
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/heart_red" />
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/history_list_heart_bpm" />
+    </LinearLayout>
+    
+</RelativeLayout>

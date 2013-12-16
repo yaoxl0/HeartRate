@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_margin_bottom">50.0dip</dimen>
+    <!-- no use -->
+    <dimen name="main_paper_layout_width">264.0dip</dimen>
+    <dimen name="main_paper_margin_top">-30.0dip</dimen>
+     <!-- no use -->
+    <dimen name="main_paper_margin_bottom">-50.0dip</dimen>
+    <dimen name="main_img_ticket_out_margin_top">-10.0dip</dimen>
+    <dimen name="main_layout_led_margin_top">92.0dip</dimen>
+    <dimen name="main_txt_desc_text_size">15.0sp</dimen>
+    <dimen name="main_txt_aqi_desc_margin_top">23.0dip</dimen>
+    <dimen name="main_txt_aqi_desc_margin_left">60.0dip</dimen>
+    <dimen name="main_txt_pm25_desc_margin_left">60.0dip</dimen>
+    <dimen name="main_txt_city_value_margin_top">-8.0dip</dimen>
+    <dimen name="main_txt_city_value_text_size">25.0sp</dimen>
+    <dimen name="main_txt_value_text_size">50.0sp</dimen>
+    <dimen name="main_txt_value_margin_right">50.0dip</dimen>
+    <dimen name="main_txt_value_margin_top">10.0dip</dimen>
+    <dimen name="main_line_margin_top">60.0dip</dimen>
+    <dimen name="main_txt_next_margin_left">80.0dip</dimen>
+    <dimen name="main_txt_next_margin_top">40.0dip</dimen>
+    <dimen name="main_txt_next_text_size">20.0sp</dimen>
+    <dimen name="main_txt_print_margin_right">75.0dip</dimen>
+    <dimen name="main_txt_print_margin_top">40.0dip</dimen>
+    <dimen name="main_txt_print_text_size">20.0sp</dimen>
+    <dimen name="main_btn_margin_left">60.0dip</dimen>
+    <dimen name="main_btn_margin_right">60.0dip</dimen>
+    <dimen name="main_btn_margin_top">70.0dip</dimen>
+    <dimen name="paper_txt_paper_report_margin_top">15.0dip</dimen>
+    <dimen name="paper_txt_paper_report_text_size">20.0sp</dimen>
+    <dimen name="paper_txt_paper_area_text_size">25.0sp</dimen>
+    <dimen name="paper_txt_paper_aqi_value_text_size">40.0sp</dimen>
+    <dimen name="paper_txt_paper_aqi_value_margin">5.0dip</dimen>
+    <dimen name="paper_txt_paper_aqi_value_padding">5.0dip</dimen>
+    <dimen name="paper_btn_paper_share_padding_right">10.0dip</dimen>
+    <dimen name="paper_btn_paper_share_margin_bottom">410.0dip</dimen>
+    <dimen name="paper_anim_up_one">-60.0dip</dimen>
+    <dimen name="paper_anim_up_two">-460.0dip</dimen>
+    <dimen name="paper_anim_right_one">10.0dip</dimen>
+    <dimen name="paper_anim_right_two">460.0dip</dimen>
+    <dimen name="paper_height">690.0px</dimen>
+    <dimen name="paper_anim_down">400.0dip</dimen>
+</resources>

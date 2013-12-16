@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:id="@+id/home_beating"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent" >
+    	
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_title"
+            android:textColor="@color/red"
+            android:textSize="22sp"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="20dp" />
+        
+		<RelativeLayout
+			android:id="@+id/displayLayout"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="100dp"
+			android:layout_marginLeft="10dp"
+			android:background="@drawable/screen" >
+			
+			<!-- 电量 -->
+			<ImageView
+				android:id="@+id/battery"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="17dip"
+				android:layout_toRightOf="@+id/currentTime"
+				android:layout_marginLeft="15dip" />
+			<!-- 时间 -->
+	 		<TextView
+				android:id="@+id/currentTime"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="80dip"
+				android:layout_marginTop="12dip" />
+			
+			<!-- 心率 -->
+			<TextView
+				android:id="@+id/numberOfBPM"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="20dip"
+				android:layout_marginTop="30dip"
+				android:textSize="50sp" />
+			<!-- 心率单位bpm -->
+			<TextView
+				android:id="@+id/bpmSign"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="20sp"
+				android:layout_toRightOf="@+id/numberOfBPM"
+				android:layout_alignBottom="@+id/numberOfBPM" />
+			<!-- 心跳强度图 -->
+			<ImageView
+				android:id="@+id/heartImage"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="130dip"
+				android:layout_marginTop="40dip" />
+		</RelativeLayout>
+		
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@+id/displayLayout"
+			android:layout_marginTop="120dp"
+			android:layout_marginLeft="15dip"
+			android:orientation="vertical" >
+			<!-- SOUND 指示灯 -->
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="20dip"
+				android:background="@drawable/led_bottom"
+				android:orientation="horizontal" >
+				<ImageView
+					android:id="@+id/sound_led"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="5dip"
+					android:layout_gravity="center_vertical"
+					android:src="@drawable/led_on" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/label_led_sound"
+					android:layout_margin="5dip" />
+			</LinearLayout>
+			<!-- POWER 指示灯 -->
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="20dip"
+				android:background="@drawable/led_bottom"
+				android:orientation="horizontal"
+				android:layout_marginTop="5dip" >
+				<ImageView
+					android:id="@+id/power_led"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="5dip"
+					android:layout_gravity="center_vertical" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/label_led_power"
+					android:layout_margin="5dip" />
+			</LinearLayout>
+		</LinearLayout>
+		
+		<!-- power开关 -->
+		<RelativeLayout
+			android:id="@+id/power"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/displayLayout"
+			android:layout_marginLeft="10dp"
+			android:clickable="true" >
+			<FrameLayout
+				android:id="@+id/power2"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="32dip"
+				android:layout_marginTop="20dip"
+				android:background="@drawable/power_bottom" >
+				<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"				
+					android:src="@drawable/symbol_power_normal" />
+			</FrameLayout>
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="30dip"
+				android:paddingTop="5dip"
+				android:layout_below="@+id/power2"
+				android:src="@drawable/label_start" />
+			
+		</RelativeLayout>
+		
+		<RelativeLayout
+			android:id="@+id/disclaimer"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/power"
+			android:layout_marginLeft="10dp"
+			android:layout_marginTop="20dip" >
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/disclaimer" />
+		</RelativeLayout>
+		
+		<RelativeLayout
+			android:id="@+id/logo"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/power"
+			android:layout_toRightOf="@+id/disclaimer"
+			android:layout_marginTop="40dip"
+			android:layout_marginLeft="40dip" >
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/logo" />
+		</RelativeLayout>
+		
+		<!-- 界面显示摄像头的成像   -->
+		<!-- layout_marginTop="-250dp" 意味着在界面的上方（250dp）位置，不在手机界面可见部分显示，相当于gone的作用 -->
+		<RelativeLayout
+			android:id="@+id/showViewTop"
+			android:layout_width="fill_parent"
+			android:layout_height="240dp"
+			android:layout_marginTop="-250dp" >
+		</RelativeLayout>
+	</RelativeLayout>
+	
+    <!-- 测量完后显示的页面 -->
+    <LinearLayout
+        android:id="@+id/home_afterbeating"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="50dp"
+		    android:background="@drawable/afterbeating_top"
+		    android:orientation="horizontal" >
+			<LinearLayout
+			    android:id="@+id/home_afterbeating_cancel"
+			    android:layout_width="wrap_content"
+			    android:layout_height="50dp"
+			    android:background="@drawable/aftering_top_select"
+			    android:orientation="horizontal"
+			    android:gravity="center"
+			    android:layout_weight="1"
+			    android:clickable="true"
+			    android:descendantFocusability="blocksDescendants" >
+				<ImageView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:src="@drawable/ic_action_cancel" />
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="@string/cancel"
+				    android:textColor="@color/white" />
+			</LinearLayout>
+			<ImageView
+			    android:layout_width="2dp"
+			    android:layout_height="30dp"
+			    android:src="@color/white"
+			    android:layout_gravity="center" />
+			<LinearLayout
+			    android:id="@+id/home_afterbeating_save"
+			    android:layout_width="wrap_content"
+			    android:layout_height="50dp"
+			    android:background="@drawable/aftering_top_select"
+			    android:orientation="horizontal"
+			    android:gravity="center"
+			    android:layout_weight="1"
+			    android:clickable="true"
+			    android:descendantFocusability="blocksDescendants" >
+				<ImageView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:src="@drawable/ic_action_tick" />
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="@string/save"
+				    android:textColor="@color/white" />
+			</LinearLayout>
+		</LinearLayout>
+		
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="30dp"
+            android:paddingBottom="50dp" >
+			<LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:gravity="right" >
+				<TextView
+				    android:id="@+id/afterbeating_resultnumber"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="00"
+				    android:textColor="@color/black"
+				    android:textSize="60sp" />
+        	</LinearLayout>
+        	<LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:paddingTop="20dp"
+	            android:gravity="center"
+	            android:orientation="vertical" >
+				<ImageView
+				    android:layout_width="wrap_content"
+	           	 	android:layout_height="wrap_content"
+	           	 	android:src="@drawable/heart_red"
+	           	 	 />
+				<TextView
+				    android:layout_width="wrap_content"
+	           	 	android:layout_height="wrap_content"
+	           	 	android:text="心率（BPM）"
+	           	 	android:textSize="20sp" />
+        	</LinearLayout>
+        </LinearLayout>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" >
+	        <LinearLayout
+	            android:id="@+id/afterbeating_green"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal"
+	            android:gravity="center_horizontal"
+	            android:paddingTop="5dp" >
+				<ImageView
+				    android:layout_width="100dp"
+				    android:layout_height="10dp"
+				    android:src="@color/green"
+				    android:layout_gravity="center_horizontal" />
+				<ImageView
+				    android:layout_width="100dp"
+				    android:layout_height="10dp"
+				    android:src="@color/orange"
+				    android:layout_gravity="center_horizontal" />
+				<ImageView
+				    android:layout_width="100dp"
+				    android:layout_height="10dp"
+				    android:src="@color/red"
+				    android:layout_gravity="center_horizontal" />
+	         </LinearLayout>
+	         <ImageView
+	            android:id="@+id/afterbeating_point_index"
+			    android:layout_width="5dp"
+			    android:layout_height="20dp"
+			    android:src="@color/blackalpha"
+			    android:layout_alignTop="@+id/afterbeating_green"
+			     />
+         </RelativeLayout>
+         
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="6dp"
+            android:orientation="horizontal" >
+			<LinearLayout
+         	    android:layout_width="100dp"
+         	    android:layout_height="wrap_content"
+         	    android:gravity="right" >
+	         	<TextView
+	         	    android:layout_width="wrap_content"
+	         	    android:layout_height="wrap_content"
+	         	    android:text="@string/little60"
+	         	    android:textSize="18sp" />
+         	</LinearLayout>
+         	<LinearLayout
+         	    android:layout_width="100dp"
+         	    android:layout_height="wrap_content"
+         	    android:gravity="center_horizontal" >
+	         	<TextView
+	         	    android:layout_width="wrap_content"
+	         	    android:layout_height="wrap_content"
+	         	    android:text="@string/between60and90"
+	         	    android:textSize="18sp"
+	         	    android:layout_gravity="center_horizontal" />
+	        </LinearLayout>
+         	<TextView
+         	    android:layout_width="100dp"
+         	    android:layout_height="wrap_content"
+         	    android:text="@string/larger90"
+         	    android:textSize="18sp" />
+        </LinearLayout>
+	</LinearLayout>
+        
+</LinearLayout>

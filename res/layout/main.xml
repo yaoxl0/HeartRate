@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" 
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" 
+	android:id="@+id/layout"
+	android:background="@drawable/background" >
+
+	<com.neusoft.yy.view.ScrollLayout   
+	  android:id="@+id/main_scrolllayout"    
+	  android:layout_width="fill_parent"    
+	  android:layout_height="fill_parent"
+   	  android:layout_weight="1">    
+  
+ 	  <include layout="@layout/frame_guide" />
+      
+	  <include layout="@layout/frame_history" />
+	  
+	  <include layout="@layout/frame_home" />
+	      
+	  <include layout="@layout/frame_logo" />
+       
+	</com.neusoft.yy.view.ScrollLayout>
+	
+	<!-- 
+	<RelativeLayout
+	    android:id="@+id/menu_bg"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:background="@drawable/bottom_menu_bg" >
+		
+	    <ImageView
+	        android:id="@+id/heart_beat"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerInParent="true"
+	        android:clickable="false"
+	        android:background="@drawable/heart_normal" />
+	    <TextView
+	        android:id="@+id/hmidd"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true" />
+	    <TextView
+	        android:id="@+id/heart_guide"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="引导"
+	        android:textSize="16sp"
+	        android:layout_below="@+id/hmidd"
+	        android:paddingTop="5dp"
+	        android:paddingLeft="20dp" />
+	    <TextView
+	        android:id="@+id/heart_history"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="记录"
+	        android:textSize="16sp"
+	        android:layout_below="@+id/hmidd"
+	        android:layout_toLeftOf="@+id/heart_beat"
+	        android:paddingTop="5dp"
+	        android:paddingRight="20dp" />
+	     <TextView
+	        android:id="@+id/heart_home"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="首页"
+	        android:textSize="16sp"
+	        android:layout_below="@+id/hmidd"
+	        android:layout_toRightOf="@+id/heart_beat"
+	        android:paddingTop="5dp"
+	        android:paddingLeft="20dp" />
+	      <TextView
+	        android:id="@+id/heart_logo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="登陆"
+	        android:textSize="16sp"
+	        android:layout_below="@+id/hmidd"
+	        android:layout_toRightOf="@+id/heart_home"
+	        android:paddingTop="5dp"
+	        android:paddingLeft="50dp" />
+	</RelativeLayout>
+	 -->
+	
+	<!-- 
+	<ImageView
+	    android:id="@+id/bottom_v1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:scaleType="matrix"
+	    android:layout_marginBottom="-13dp"
+	    android:layout_alignParentTop="true"
+	    android:src="@drawable/bottom_v1" />
+	 -->
+	 
+	<RelativeLayout
+        android:id="@+id/menu_bg"
+	    android:layout_width="fill_parent"
+	    android:layout_height="50dp"
+	    android:layout_alignParentBottom="true"
+	    android:background="@drawable/bottom_menu_bg" >
+        <ImageView
+		    android:id="@+id/bottom_v1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="30dp"
+		    android:scaleType="matrix"
+		    android:layout_centerVertical="true"
+		    android:src="@drawable/bottom_v1" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+            <!-- TextView一定要放在RelativeLayout布局中，
+            	保证android:layout_width="wrap_content" 
+            	和android:layout_centerInParent="true"属性，
+				这样才可以获得TextView的位置，依靠这个位置定位滑动块的初始位置 
+			-->
+            <RelativeLayout
+                android:id="@+id/layout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.0" >
+                <TextView
+                    android:id="@+id/heart_guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="引导" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/layout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.0" >
+                <TextView
+                    android:id="@+id/heart_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="记录" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/layout3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.0" >
+                <TextView
+                    android:id="@+id/heart_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="首页" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/layout4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.0" >
+                <TextView
+                    android:id="@+id/heart_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="登陆" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+	
+</RelativeLayout>

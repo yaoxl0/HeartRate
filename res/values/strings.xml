@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_text">--</string>
+    <string name="app_name">HeartRateMonitor</string>
+    
+    <string name="guide_first_howtotext">如何测量？</string>
+    <string name="guide_first_howtouse">轻轻将你的食指放在你手机背面的摄像头和闪光灯上，以确保他们已完全被覆盖。保持这个姿势直到测试完成。</string>
+    
+    <string name="guide_second_history_title">历史信息</string>
+    <string name="guide_second_history_content">在历史页面你可以查看你过去的测量情况。\n如果使用自己的账号，可以查看历史记录，并且只有自己才能看见。</string>
+    
+    <string name="guide_third_load_title">登陆介绍</string>
+    <string name="guide_third_load_content">在登陆页面你可以创建自己的用户账号，用以保存历史数据，并且此数据只有你可以看见。</string>
+    
+    <string name="home_title">Heart Rate</string>
+    
+    <string name="cancel">放弃</string>
+    <string name="save">保存</string>
+    
+    <string name="little60">&lt; 60</string>
+    <string name="between60and90">60 - 90</string>
+    <string name="larger90">&gt; 90</string>
+    
+    <string name="history_list_timetitle">测试时间</string>
+    <string name="history_list_time_default">2013-12-11</string>
+    <string name="history_list_heartnum_default">00</string>
+    <string name="history_list_heart_bpm">心率（BPM）</string>
+    
+    <string name="share_trash">删除/分享</string>
+    <string name="share">分享</string>
+    <string name="trash">删除</string>
+    <string name="trashdescript">你真的想删除这次的测量吗？</string>
+    <string name="canceltrash">取消</string>
+    
+    <string name="press_again_exist">再按一次退出</string>
+    
+</resources>
