@@ -32,6 +32,21 @@
     <string name="trashdescript">你真的想删除这次的测量吗？</string>
     <string name="canceltrash">取消</string>
     
+    <string name="login_title">登陆</string>
+    <string name="login_username">用户名</string>
+    <string name="login_password">密码</string>
+    <string name="login_registbutton">注册新账号</string>
+    <string name="login_registcontent">填写下面的信息完成注册</string>
+    <string name="login_regist_title">注册</string>
+    <string name="noempty_regist_username">用户名不能为空</string>
+    <string name="noempty_regist_password">密码不能为空</string>
+    <string name="name_or_pass_error">用户名或密码错误，请重新输入</string>
+    
+    <string name="userdb_uniqname">该名字已注册，请换一个名字</string>
+    <string name="userdb_error">数据库异常，请重新尝试</string>
+    <string name="userdb_add_success">注册成功</string>
+    <string name="quitecurrentuser">退出当前用户</string>
+    
     <string name="press_again_exist">再按一次退出</string>
     
 </resources>

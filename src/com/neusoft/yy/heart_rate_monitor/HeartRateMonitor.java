@@ -13,6 +13,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.neusoft.yy.adapter.HistoryAdapter;
 import com.neusoft.yy.bean.Rate;
+import com.neusoft.yy.dao.HeartRateDao;
+import com.neusoft.yy.dao.UserDao;
+import com.neusoft.yy.util.Common;
 import com.neusoft.yy.view.CommonDialog;
 import com.neusoft.yy.view.DrawHeartDiagram;
 import com.neusoft.yy.view.ScrollLayout;
@@ -46,6 +49,7 @@ import android.os.PowerManager.WakeLock;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -59,9 +63,11 @@ import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -73,7 +79,9 @@ import android.widget.LinearLayout.LayoutParams;
 
 public class HeartRateMonitor extends Activity {
 
-	public static final int HEARTRATE_ONE = 1;
+	public static final int HEARTRATE_ZERO = 0; // 按返回键的返回值
+	public static final int HEARTRATE_ONE = 1;  // 查看结果并删除时返回值
+	public static final int HEARTRATE_TWO = 2;  // 有新注册时的返回值
     private static final String TAG = "HeartRateMonitor";
     private static final AtomicBoolean processing = new AtomicBoolean(false);
     
@@ -203,18 +211,34 @@ public class HeartRateMonitor extends Activity {
     private int guideDotCount;
     private ImageView guideDotImageViews[] = null;
     private int guideDotCurrentIndex;
+    
+    private LinearLayout login_in = null;
+    private EditText login_username = null;
+    private EditText login_password = null;
+    private RelativeLayout login_loginbutton = null;
+    private RelativeLayout login_registbutton = null;
+    private LinearLayout login_out = null;
+    private boolean isUserLogin = false;
+    private TextView current_username = null;
+    private RelativeLayout quitecurrentuser = null;
+    
+    private UserDao userDao = null;
+    private HeartRateDao heartRateDao = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        // test
+        // test 正式发布时要删除
         Rate r = new Rate();
         r.setHeartNumber("66");
         r.setHeartTime(new Date());
         mRateList.add(r);
         // test end
+        
+        userDao = new UserDao(this);
+        heartRateDao = new HeartRateDao(this);
         
         heart_guide = (TextView) findViewById(R.id.heart_guide);
         heart_guide.setOnClickListener(new MyOnClickListener());
@@ -263,6 +287,8 @@ public class HeartRateMonitor extends Activity {
         initHistory();
         
 		initHome();
+		
+		initLogin();
         
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotDimScreen");
@@ -410,21 +436,29 @@ public class HeartRateMonitor extends Activity {
     
     private void showHistoryListOnItemLongClickDialog(Context context, final int position){
     	new CommonDialog.Builder(context)
-    		.setTitle(R.string.share_trash)
+    		.setTitle(R.string.trash)
     		.setNegativeButton(R.string.trash, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int arg1) {
+					if(isUserLogin) {
+						Rate rate = mRateList.get(position);
+						String username = rate.getUsername();
+						String time = Common.dateToString(rate.getHeartTime());
+						heartRateDao.deleteRate(username, time);
+					}
+					
 					mRateList.remove(position);
 					historyAdapter.notifyDataSetChanged();
 					dialog.cancel();
 				}
 			})
-			.setPositiveButton(R.string.share, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					Toast.makeText(HeartRateMonitor.this, "share", Toast.LENGTH_SHORT).show();
-				}
-			}).create().show();
+//			.setPositiveButton(R.string.share, new DialogInterface.OnClickListener() {
+//				@Override
+//				public void onClick(DialogInterface dialog, int which) {
+//					Toast.makeText(HeartRateMonitor.this, "share", Toast.LENGTH_SHORT).show();
+//				}
+//			})
+			.create().show();
     }
     
     private void initHome() {
@@ -574,10 +608,13 @@ public class HeartRateMonitor extends Activity {
 
 			case R.id.home_afterbeating_save:
 				Rate rate = new Rate();
+				rate.setUsername(current_username.getText().toString());
 				rate.setHeartNumber(String.valueOf(beatsAvg));
 				rate.setHeartTime(new Date(System.currentTimeMillis()));
 				mRateList.add(0, rate); // 每次得到的新数据都添加到首位
 				historyAdapter.notifyDataSetChanged();
+				if(isUserLogin)
+					heartRateDao.addRate(rate);
 				
 				// 滑动到history页面
 				currentIndex = 1;
@@ -649,6 +686,77 @@ public class HeartRateMonitor extends Activity {
 		home_afterbeating_point_index.startAnimation(animation);
     }
     
+    private void initLogin(){
+    	login_in = (LinearLayout) findViewById(R.id.login_in);
+    	login_username = (EditText) findViewById(R.id.login_username);
+    	login_password = (EditText) findViewById(R.id.login_password);
+    	login_loginbutton = (RelativeLayout) findViewById(R.id.login_loginbutton);
+    	login_loginbutton.setOnClickListener(new LoginOnClientListener());
+    	login_registbutton = (RelativeLayout) findViewById(R.id.login_registbutton);
+    	login_registbutton.setOnClickListener(new LoginOnClientListener());
+    	login_out = (LinearLayout) findViewById(R.id.login_out);
+    	current_username = (TextView) findViewById(R.id.current_username);
+    	quitecurrentuser = (RelativeLayout) findViewById(R.id.quitecurrentuser);
+    	quitecurrentuser.setOnClickListener(new LoginOnClientListener());
+    }
+    
+    private class LoginOnClientListener implements OnClickListener {
+		@Override
+		public void onClick(View v) {
+			int id = v.getId();
+			switch (id) {
+			case R.id.login_loginbutton:
+				login_loginbutton.setClickable(false);
+				String username = login_username.getText().toString();
+				if(TextUtils.isEmpty(username)) {
+					Toast.makeText(HeartRateMonitor.this, R.string.noempty_regist_username, Toast.LENGTH_SHORT).show();
+					login_loginbutton.setClickable(true);
+					return;
+				}
+				String password = login_password.getText().toString();
+				if(TextUtils.isEmpty(password)) {
+					Toast.makeText(HeartRateMonitor.this, R.string.noempty_regist_password, Toast.LENGTH_SHORT).show();
+					login_loginbutton.setClickable(true);
+					return;
+				}
+				int result = userDao.getCountUser(username, password);
+				if(result > 0) {
+					isUserLogin = true;
+					login_in.setVisibility(View.GONE);
+					login_out.setVisibility(View.VISIBLE);
+					current_username.setText(username);
+					// 涉及到数据库操作的可能比较耗费时间，如果不行，可以放到子线程中，再优化
+					List<Rate> rates = heartRateDao.searchRateByUserName(username);
+					mRateList.clear();
+					mRateList.addAll(rates);
+					historyAdapter.notifyDataSetChanged();
+					// 软键盘隐藏
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  
+					imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+				} else {
+					// 用户名或密码不对，请重新输入
+					Toast.makeText(HeartRateMonitor.this, R.string.name_or_pass_error, Toast.LENGTH_SHORT).show();
+					login_loginbutton.setClickable(true);
+				}
+				login_username.setText("");
+				login_password.setText("");
+				login_loginbutton.setClickable(true);
+				break;
+			case R.id.login_registbutton:
+				Intent intent = new Intent(HeartRateMonitor.this, LoginRegistUser.class);
+				startActivityForResult(intent, HEARTRATE_TWO);
+				break;
+			case R.id.quitecurrentuser:
+				login_in.setVisibility(View.VISIBLE);
+				login_out.setVisibility(View.GONE);
+				mRateList.clear();
+				historyAdapter.notifyDataSetChanged();
+				isUserLogin = false;
+				break;
+			}
+		}
+    }
+    
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -674,10 +782,23 @@ public class HeartRateMonitor extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
+		Bundle mBundle = data.getExtras();
 		if(HEARTRATE_ONE == resultCode) {
-			Bundle mBundle = data.getExtras();
 			int position = mBundle.getInt("position");
+			if(isUserLogin) {
+				Rate rate = mRateList.get(position);
+				String username = rate.getUsername();
+				String time = Common.dateToString(rate.getHeartTime());
+				heartRateDao.deleteRate(username, time);
+			}
 			mRateList.remove(position);
+			historyAdapter.notifyDataSetChanged();
+		} else if(HEARTRATE_TWO == resultCode) {
+			String username = mBundle.getString("username");
+			login_in.setVisibility(View.GONE);
+			login_out.setVisibility(View.VISIBLE);
+			current_username.setText(username);
+			mRateList.clear();
 			historyAdapter.notifyDataSetChanged();
 		}
 	}
@@ -777,7 +898,8 @@ public class HeartRateMonitor extends Activity {
                 if (newType != currentType) {
                     beats++;
                     soundPool.play(beat_sound, 1, 1, 1, 0, 1); //心跳一次，发一次心跳声音
-                    diagram.getY = (imgAvg-210) * 5;
+//                    diagram.getY = (imgAvg-210) * 5;
+                    diagram.getY = 20;
                     diagram.postInvalidate();
                 }
             } else if (imgAvg > rollingAverage) {

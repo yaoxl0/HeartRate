@@ -5,9 +5,21 @@ import java.util.Date;
 
 public class Rate implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String username;
 	private Date heartTime;
-	
 	private String heartNumber;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	public Date getHeartTime() {
 		return heartTime;

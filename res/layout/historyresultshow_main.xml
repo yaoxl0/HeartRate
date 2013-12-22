@@ -17,13 +17,16 @@
 	        android:textSize="18sp"
 	        android:paddingLeft="10dp"
 	        android:layout_centerVertical="true" />
+	    
+	    <!-- gone 以后再说 -->
 	    <ImageView
 	        android:id="@+id/historyresultshow_share"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:src="@drawable/ic_action_share"
 	        android:layout_toLeftOf="@+id/historyresultshow_trash"
-	        android:paddingRight="10dp" />
+	        android:paddingRight="10dp"
+	        android:visibility="gone" />
 	    <ImageView
 	        android:id="@+id/historyresultshow_trash"
 	        android:layout_width="wrap_content"

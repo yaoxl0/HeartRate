@@ -1,8 +1,7 @@
 package com.neusoft.yy.heart_rate_monitor;
 
-import java.text.SimpleDateFormat;
-
 import com.neusoft.yy.bean.Rate;
+import com.neusoft.yy.util.Common;
 import com.neusoft.yy.view.CommonDialog;
 
 import android.app.Activity;
@@ -14,7 +13,6 @@ import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +42,7 @@ public class HistoryResultShowActivity extends Activity {
 		position = mBundle.getInt("position");
 		
 		mHistoryTime = (TextView) findViewById(R.id.history_time);
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		mHistoryTime.setText(sdf.format(mRate.getHeartTime()));
+		mHistoryTime.setText(Common.dateToString(mRate.getHeartTime()));
 		
 		mHistoryHeartnum = (TextView) findViewById(R.id.history_heartnum);
 		mHistoryHeartnum.setText(mRate.getHeartNumber());
@@ -68,6 +65,7 @@ public class HistoryResultShowActivity extends Activity {
 		animation.setDuration(600L);
 		mHistoryPointIndex.startAnimation(animation);
 		
+		// 该按钮gone了，先不实现这个功能
 		mHistoryShare = (ImageView) findViewById(R.id.historyresultshow_share);
 		mHistoryShare.setOnClickListener(new OnClickListener() {
 			@Override
@@ -103,6 +101,14 @@ public class HistoryResultShowActivity extends Activity {
 					.show();
 			}
 		});
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent data=new Intent();
+        data.putExtra("position", "");
+        setResult(HeartRateMonitor.HEARTRATE_ZERO, data);
+        finish();
 	}
 	
 }

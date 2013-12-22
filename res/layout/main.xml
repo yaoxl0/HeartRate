@@ -18,7 +18,7 @@
 	  
 	  <include layout="@layout/frame_home" />
 	      
-	  <include layout="@layout/frame_logo" />
+	  <include layout="@layout/frame_login" />
        
 	</com.neusoft.yy.view.ScrollLayout>
 	

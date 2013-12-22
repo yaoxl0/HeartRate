@@ -48,18 +48,20 @@ public class DrawHeartDiagram extends View {
 	private void prepareLine(){
 		int py = getY + ORIGIN_Y;
 		Point p = new Point(ORIGIN_X , py);
-		if(mPlist.size() > 201){
+		int sumDot = 100;
+		int moveLength = 3;
+		if(mPlist.size() > sumDot+1){
 			mPlist.remove(0);
-			for (int i = 0; i < 200; i++) {
+			for (int i = 0; i < sumDot; i++) {
 //				if(i == 0) mPlist.get(i).x -= (X_INTERVAL - 2);
 //				else 
-					mPlist.get(i).x -= 2;
+					mPlist.get(i).x -= moveLength;
 			}
 			mPlist.add(p);
 		}
 		else{
 			for (int i = 0; i < mPlist.size(); i++) {
-				mPlist.get(i).x -= 2;
+				mPlist.get(i).x -= moveLength;
 			}
 			mPlist.add(p);
 		}

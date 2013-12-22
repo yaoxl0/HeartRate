@@ -182,7 +182,7 @@
 		</RelativeLayout>
 	</RelativeLayout>
 	
-    <!-- 测量完后显示的页面 -->
+    <!-- 测量完后显示的页面  默认是 gone -->
     <LinearLayout
         android:id="@+id/home_afterbeating"
         android:layout_width="fill_parent"
